@@ -144,3 +144,100 @@ export class VisitTherapist extends Visit {
 		return cardElement;
     }
 }
+
+//add filters
+const searchInput = document.querySelector('input[type="search"]');
+const selectPriority = document.getElementById('selectPriority');
+
+searchInput.addEventListener('input', handleFilterChange);
+selectPriority.addEventListener('change', handleFilterChange);
+
+function handleFilterChange() {
+    const searchValue = searchInput.value.trim().toLowerCase();
+    const priorityFilter = selectPriority.value.toLowerCase();
+
+    if (searchValue === '' && priorityFilter === 'choose priority') {
+        viewAllCards();
+    } else {
+        viewFilteredCards(searchValue, priorityFilter);
+    }
+}
+
+async function viewAllCards() {
+    let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+    let cards = await response.json();
+
+    if (cards.length) {
+        document.querySelector('.main__items-text').classList.add('d-none');
+    } else {
+        document.querySelector('.main__items-text').classList.remove('d-none');
+    }
+
+    const cardsWrapper = document.querySelector('.main__cards-wrapper');
+    cardsWrapper.innerHTML = '';
+
+    cards.forEach(card => {
+        let cardElement;
+        if (card.doctor === 'cardiologist') {
+            const visitCardiologist = new VisitCardiologist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.pressure, card.bodyMassIndex, card.heart, card.age);
+            cardElement = visitCardiologist.render();
+        } else if (card.doctor === 'dentist') {
+            const visitDentist = new VisitDentist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.lastVisit);
+            cardElement = visitDentist.render();
+        } else if (card.doctor === 'therapist') {
+            const visitTherapist = new VisitTherapist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.age);
+            cardElement = visitTherapist.render();
+        }
+        cardElement.setAttribute('data-id', card.id);
+        cardsWrapper.append(cardElement);
+    });
+}
+
+async function viewFilteredCards(searchValue, priorityFilter) {
+    let response = await fetch("https://ajax.test-danit.com/api/v2/cards", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+    let cards = await response.json();
+
+    if (cards.length) {
+        document.querySelector('.main__items-text').classList.add('d-none');
+    } else {
+        document.querySelector('.main__items-text').classList.remove('d-none');
+    }
+
+    const cardsWrapper = document.querySelector('.main__cards-wrapper');
+    cardsWrapper.innerHTML = '';
+
+    cards.filter(card => {
+        return (
+            card.name.toLowerCase().includes(searchValue) ||
+            card.doctor.toLowerCase().includes(searchValue) ||
+            card.purpose.toLowerCase().includes(searchValue) ||
+            card.description.toLowerCase().includes(searchValue)
+        ) && (
+            priorityFilter === 'choose priority' || card.priority.toLowerCase() === priorityFilter
+        );
+    }).forEach(card => {
+        let cardElement;
+        if (card.doctor === 'cardiologist') {
+            const visitCardiologist = new VisitCardiologist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.pressure, card.bodyMassIndex, card.heart, card.age);
+            cardElement = visitCardiologist.render();
+        } else if (card.doctor === 'dentist') {
+            const visitDentist = new VisitDentist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.lastVisit);
+            cardElement = visitDentist.render();
+        } else if (card.doctor === 'therapist') {
+            const visitTherapist = new VisitTherapist(card.doctor, card.purpose, card.description, card.priority, card.name, card.id, card.age);
+            cardElement = visitTherapist.render();
+        }
+        cardElement.setAttribute('data-id', card.id);
+        cardsWrapper.append(cardElement);
+    });
+}
