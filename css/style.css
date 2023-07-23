@@ -35,9 +35,19 @@ header button {
     padding: 2em;
 }
 
+.card {
+  padding: 1em;
+}
+
 .card-button {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1em;
+    right: 1em;
+}
+
+.btn-warning {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
 }
 
