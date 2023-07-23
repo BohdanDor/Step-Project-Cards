@@ -381,5 +381,3 @@ export class VisitTherapist extends Visit {
 		return cardElement;
     }
 }
-
-
