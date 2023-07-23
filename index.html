@@ -14,7 +14,7 @@
     <header>
         <div class="container-fluid d-flex flex-wrap align-items-center justify-content-around py-3 mb-2">
             <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none">
-                <img class=" float-start logo" height="60px" src="./img/logo.png" alt="logo">
+                <img class=" float-start logo" height="60px" src="./img/logo.svg" alt="logo">
                 <h3 class="text-primary header__logo-title">MedClinic</h3>
             </a>
             <div class="col-md-3 d-flex justify-content-end">
@@ -44,7 +44,7 @@
                     <div>
                         <label for="selectPriority" class="mr-2"></label>
                         <select class="form-control form-select" aria-label="Default select example" id="selectPriority">
-                            <option value="" selected>Choose Priority</option>
+                            <option value="Choose Priority" selected>Choose Priority</option>
                             <option value="high">High</option>
                             <option value="normal">Normal</option>
                             <option value="low">Low</option>
@@ -103,48 +103,44 @@
             <div class="modal-body">
                 <form id="visit-form" name="visitForm">
                     <div class="doctors_section">
-                        <select class="form-select mb-3 select-doctors" aria-label="Default select example" id="doctor"
+                        <select class="form-select mb-3 select-doctors" aria-label="Default select example" 
                             name="doctor" required>
-                            <option selected >Choose a doctor</option>
+                            <option value="" selected disabled>Choose a doctor</option>
                             <option value="cardiologist" id="cardiologist">Cardiologist</option>
                             <option value="dentist" id="dentist">Dentist</option>
                             <option value="therapist" id="therapist">Therapist</option>
                         </select>
                     </div>
                     <div class="base-options">
-                        <input name="purpose" id="purpose" required type="text" class="form-control mb-3 title"
+                        <input name="purpose"  required type="text" class="form-control mb-3 title"
                             placeholder="Purpose of visit" />
-                        <input name="description" id="description" required type="text" class="form-control mb-3 title"
-                            placeholder="description of visit" />        
+                        <input name="description"  required type="text" class="form-control mb-3 title"
+                            placeholder="Description of visit" />        
                         <div class="priority-select" id="priority-select">
-                            <select class="form-select mb-3 select-priority" aria-label="Default select example" id="priority"
+                            <select class="form-select mb-3 select-priority" aria-label="Default select example" 
                             name="priority" required>
-                            <option selected >Priority</option>
+                            <option value="" selected disabled>Priority</option>
                             <option value="low" id="low">Low</option>
                             <option value="normal" id="normal">Normal</option>
                             <option value="high" id="high">High</option>
                             </select>
                         </div>
-                        <input name="name" id="name" required class="form-control mb-3" type="text" placeholder="Name & surname" />
+                        <input name="name"  required class="form-control mb-3" type="text" placeholder="Name & surname"/>
                     </div>
                     <div class="cardiologist-options d-none">
-                        <input class="form-control mb-3" type="text" placeholder="Pressure" name="pressure"
-                            id="pressure" />
-                        <input class="form-control mb-3" type="text" placeholder="Body mass index" name="bodyMassIndex"
-                            id="bodyMassIndex" />
-                        <input class="form-control mb-3" type="text" placeholder="Diseases of heart"
-                            name="heart" id="heart" />
+                        <input class="form-control mb-3" type="text" placeholder="Pressure" name="pressure" id="pressure" required/>
+                        <input class="form-control mb-3" type="text" placeholder="Body mass index" name="bodyMassIndex" id="bodyMassIndex" required/>
+                        <input class="form-control mb-3" type="text" placeholder="Diseases of heart" name="heart" id="heart" required/>
                     </div>
 
                     <div class="dentist-options d-none">
-                        <input class="form-control mb-3" type="text" placeholder="Date of last visit" name="lastVisit"
-                            id="lastVisit" />
+                        <input class="form-control mb-3" type="text" placeholder="Date of last visit" name="lastVisit" id="lastVisit" required/>
                     </div>
                     <div class="therapist-options d-none">
-                        <input class="form-control mb-3" type="text" placeholder="Age" name="age"/>
+                        <input class="form-control mb-3" type="text" placeholder="Age" name="age" id="age" required/>
                     </div>
 
-                    <button class="btn btn-lg btn-primary select-doctor-btn d-inline" name="submit-btn" id="submit-btn" type="submit">Submit</button>
+                    <button class="btn btn-lg btn-primary select-doctor-btn d-inline" name="submit-btn"  type="submit">Create visit</button>
                     
                 </form>
             </div>
@@ -152,7 +148,7 @@
         </div>
     </div>
 
-    <!-- Modal Edit visit-->
+    <!-- Modal Edit visit Cardiologist-->
     <div class="modal fade text-center modal-md" id="edit-visit" tabindex="-1" aria-labelledby="editModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
@@ -162,11 +158,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="edit-form" name="editForm">
+                    <form id="editForm" name="editForm">
                         <div class="doctors_section">
                             <select class="form-select mb-3 select-doctors" aria-label="Default select example"
-                                name="doctor" required>
-                                <option selected>Choose a doctor</option>
+                                name="doctor" id="doctor" required disabled>
+                                <option value="" selected disabled>Choose a doctor</option>
                                 <option value="cardiologist" >Cardiologist</option>
                                 <option value="dentist" >Dentist</option>
                                 <option value="therapist" >Therapist</option>
@@ -174,41 +170,132 @@
                         </div>
                         <div class="base-options">
                             <input name="purpose"  required type="text" class="form-control mb-3 title"
-                                placeholder="Purpose of visit" />
+                                placeholder="Purpose of visit" id="purpose"/>
                             <input name="description"  required type="text" class="form-control mb-3 title"
-                                placeholder="description of visit" />
+                                placeholder="description of visit" id="description"/>
                             <div class="priority-select" >
                                 <select class="form-select mb-3 select-priority" aria-label="Default select example"
-                                     name="priority" required>
-                                    <option selected>Priority</option>
+                                     name="priority" id="priority" required>
+                                    <option value="" selected disabled>Priority</option>
                                     <option value="low" >Low</option>
                                     <option value="normal" >Normal</option>
                                     <option value="high" >High</option>
                                 </select>
                             </div>
-                            <input name="name"  required class="form-control mb-3" type="text"
-                                placeholder="Name & surname" />
+                            <input name="name" id="name"  class="form-control mb-3" type="text" placeholder="Name & surname" required/>
                         </div>
-                        <div class="cardiologist-options d-none">
-                            <input class="form-control mb-3" type="text" placeholder="Pressure" name="pressure"
-                                 />
-                            <input class="form-control mb-3" type="text" placeholder="Body mass index" name="bodyMassIndex"
-                                 />
-                            <input class="form-control mb-3" type="text" placeholder="Diseases of heart" name="heart"
-                                 />
+                        <div class="cardiologist-options">
+                            <input class="form-control mb-3" type="text" placeholder="Pressure" name="pressure" id="pressureCardiologist" required/>
+                            <input class="form-control mb-3" type="text" placeholder="Body mass index" name="bodyMassIndex" id="bodyMassIndexCardiologist" required/>
+                            <input class="form-control mb-3" type="text" placeholder="Diseases of heart" name="heart" id="heartCardiologist" required/>
                         </div>
-    
-                        <div class="dentist-options d-none">
-                            <input class="form-control mb-3" type="text" placeholder="Date of last visit" name="lastVisit"
-                                 />
-                        </div>
-                        <div class="therapist-options d-none">
-                            <input class="form-control mb-3" type="text" placeholder="Age" name="age" />
+                        <div class="cardiologist-options">
+                            <input class="form-control mb-3" type="text" placeholder="Age" name="age" id="ageCardiologist" required/>
                         </div>
     
                         <button class="btn btn-lg btn-primary select-doctor-btn d-inline" name="submit-btn" 
-                            type="submit">Submit</button>
+                            type="submit" id="submit-btn">Save</button>
                         
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit visit Dentist-->
+    <div class="modal fade text-center modal-md" id="edit-visit-dentist" tabindex="-1" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-header__title fs-5" id="editModalLabelDentist">Edit visit</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editFormDentist" name="editForm">
+                        <div class="doctors_section">
+                            <select class="form-select mb-3 select-doctors" aria-label="Default select example"
+                                name="doctor" id="doctorDentist" required disabled>
+                                <option value="" selected disabled>Choose a doctor</option>
+                                <option value="cardiologist">Cardiologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="therapist">Therapist</option>
+                            </select>
+                        </div>
+                        <div class="base-options">
+                            <input name="purpose" required type="text" class="form-control mb-3 title"
+                                placeholder="Purpose of visit" id="purposeDentist" />
+                            <input name="description" required type="text" class="form-control mb-3 title"
+                                placeholder="description of visit" id="descriptionDentist" />
+                            <div class="priority-select">
+                                <select class="form-select mb-3 select-priority" aria-label="Default select example"
+                                    name="priority" id="priorityDentist" required>
+                                    <option value="" selected disabled>Priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <input name="name" id="nameDentist" class="form-control mb-3" type="text" placeholder="Name & surname" required/>
+                        </div>                       
+    
+                        <div class="dentist-options">
+                            <input class="form-control mb-3" type="text" placeholder="Date of last visit" name="lastVisit" id="lastVisitDentist" required/>
+                        </div>
+    
+                        <button class="btn btn-lg btn-primary select-doctor-btn d-inline" name="submit-btn" type="submit"
+                            id="submit-btn-dentist">Save</button>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit visit Therapist-->
+    <div class="modal fade text-center modal-md" id="edit-visit-therapist" tabindex="-1" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-header__title fs-5">Edit visit</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editFormTherapist" name="editForm">
+                        <div class="doctors_section">
+                            <select class="form-select mb-3 select-doctors" aria-label="Default select example"
+                                name="doctor" id="doctorTherapist" required disabled>
+                                <option value="" selected disabled>Choose a doctor</option>
+                                <option value="cardiologist">Cardiologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="therapist">Therapist</option>
+                            </select>
+                        </div>
+                        <div class="base-options">
+                            <input name="purpose" required type="text" class="form-control mb-3 title"
+                                placeholder="Purpose of visit" id="purposeTherapist" />
+                            <input name="description" required type="text" class="form-control mb-3 title"
+                                placeholder="description of visit" id="descriptionTherapist" />
+                            <div class="priority-select">
+                                <select class="form-select mb-3 select-priority" aria-label="Default select example"
+                                    name="priority" id="priorityTherapist" required>
+                                    <option value="" selected disabled>Priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <input name="name" id="nameTherapist" class="form-control mb-3" type="text"
+                                placeholder="Name & surname" required />
+                            <div class="therapist-options">
+                                <input class="form-control mb-3" type="text" placeholder="Age" name="age" id="ageTherapist" required/>
+                            </div>
+                        </div>
+      
+                        <button class="btn btn-lg btn-primary select-doctor-btn d-inline" name="submit-btn" type="submit"
+                            id="submit-btn-therapist">Save</button>
+    
                     </form>
                 </div>
             </div>
@@ -220,7 +307,6 @@
         integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous">
     </script>
 
-    <!-- <script src="./js/authorization.js"></script> -->
     <script type="module" src="./js/main.js"></script>
 
 
