@@ -8,6 +8,48 @@ export class Visit {
         this.name = name;
         this.id = id;
     }
+
+    render() {
+		const cardElement = document.createElement('div');
+			cardElement.classList.add('card');
+			cardElement.innerHTML = `
+				<h3>Name: ${this.name}</h3>				
+				<p>Doctor: ${this.doctor}</p>
+                <button type="button" class="btn-close card-button" aria-label="Delete"></button>
+                <button type="button" class="btn btn-secondary show-more-button">Show More</button>
+                <div class="more-data mt-3" style="display: none;">
+                    <p>Purpose of visit: ${this.purpose}</p>
+                    <p>Description of visit: ${this.description}</p>
+                    <p>Priority: ${this.priority}</p>
+                    <p>ID: ${this.id}</p>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-visit-dentist">Edit</button>
+                </div>
+			`;
+		const deleteBtn = cardElement.querySelector('.card-button');
+		deleteBtn.addEventListener('click', () => {
+			this.deleteCard();
+        });
+        
+        const editBtn = cardElement.querySelector('.btn.btn-warning');
+        editBtn.addEventListener('click', () => {
+            this.openEditModal(); 
+        });
+
+        const showMoreBtn = cardElement.querySelector('.show-more-button');
+        const moreData = cardElement.querySelector('.more-data');
+
+        showMoreBtn.addEventListener('click', () => {
+            if (moreData.style.display === 'none') {
+                moreData.style.display = 'block';
+                showMoreBtn.textContent = 'Show Less';
+            } else {
+                moreData.style.display = 'none';
+                showMoreBtn.textContent = 'Show More';
+            }
+        })
+
+		return cardElement;
+    }
     
     async deleteCard() {
 		try {
